@@ -1,0 +1,89 @@
+{% extends 'ecommerce/base.html' %}
+{% load static %}
+{% block body %}
+
+    <div class="page-holder">
+  
+      <div class="container">
+        <!-- HERO SECTION-->
+        <section class="py-5 bg-light">
+          <div class="container">
+            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+              <div class="col-lg-6">
+                <h1 class="h2 text-uppercase mb-0">My Orders</h1>
+              </div>
+              <div class="col-lg-6 text-lg-right">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="py-5">
+            
+          
+          <div class="row">
+               <div class="col-md-3">
+                    {% include "auth/user_panel.html" %}
+                </div>
+                
+            <div class="col-lg-8 mb-4 mb-lg-0">
+              <!-- CART TABLE-->
+              <h2 class="h5 text-uppercase mb-4">My Orders  </h2>
+              <div class="table-responsive mb-4">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr>
+                    <th class="border-0" scope="col"> <strong class="text-small text-uppercase">id</strong></th>
+                     <th class="border-0" scope="col"> <strong class="text-small text-uppercase">UserName</strong></th>
+                      
+                      <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Total</strong></th>
+                      <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Status</strong></th>
+                      <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Create Date</strong></th>
+                      <th class="border-0" scope="col"> </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in orders %}
+                    <tr>
+                     
+                      <td class="align-middle border-0">
+                        <p class="mb-0 small">{{item.id}}</p>
+                      </td>
+                       <td class="align-middle border-0">
+                        <p class="mb-0 small">{{item.user_name}}</p>
+                      </td>
+                       
+                       <td class="align-middle border-0">
+                        <p class="mb-0 small">{{item.total}}</p>
+                      </td>
+                     
+                      <td class="align-middle border-0">
+                        <p class="mb-0 small">{{item.status}}</p>
+                      </td>
+                       <td class="align-middle border-0">
+                        <p class="mb-0 small">{{item.create_at}}</p>
+                      </td>
+                      <td class="align-middle border-0 "><a class="reset-anchor btn btn-warning btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{% url 'accounts:user_order_detail' item.id %}">Detail</a></td>
+                    </tr>
+
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+              <!-- CART NAV-->
+             
+            </div>
+            <!-- ORDER TOTAL-->
+           
+          </div>
+        </section>
+      </div>
+      
+    </div>
+
+{% endblock body %}

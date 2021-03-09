@@ -1,0 +1,51 @@
+ {% load static %}
+ <header class="header bg-white">
+        <div class="container px-0 px-lg-3">
+          <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="{% url 'home:home' %}"><span class="font-weight-bold text-uppercase text-dark">Boutique</span></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              
+              <ul class="navbar-nav mr-auto">
+                   
+                
+
+                <li class="nav-item">
+                  <!-- Link--><a class="nav-link active" href="{% url 'home:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <!-- Link--><a class="nav-link" href="{% url 'product:shop' %}">Shop</a>
+                </li>
+                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                  <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                   {% load myapptags %}
+					         {% categoryTree 0 '' as category %}
+					       <ul class="list-unstyled small text-muted pl-lg-4 font-weight-normal">
+						
+					       {{ category | safe  }}
+					       </ul>
+                </div>
+                </li>
+    
+              </ul>
+              <ul class="navbar-nav ml-auto">               
+                <li class="nav-item"><a class="nav-link" href="{% url 'paiyement:cart' %}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">(2)</small></a></li>
+                <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
+                {% if not request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}"> <i class="fas fa-user-alt mr-1 text-gray"></i>Register</a></li>
+                {% else %}
+                  <img src="{{request.user.userprofile.image.url }}" class="rounded-circle" style="height: 40px; border-radius: 40%">
+                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">hello,{{request.user.username}}</a>
+                  <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item border-0 transition-link" href="{% url 'accounts:profile' %}">My Account</a>
+                    
+                  </div>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}"> <i class="fas fa-user-alt mr-1 text-gray"></i>Logout</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>

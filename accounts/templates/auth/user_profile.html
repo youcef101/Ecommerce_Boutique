@@ -1,0 +1,78 @@
+{% extends 'ecommerce/base.html' %}
+{% block body %}
+<!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-3">
+                    {% include "auth/user_panel.html" %}
+                </div>
+
+                <div class="col-md-9">
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">User Profile Inf.</h3>
+                            {% if messages %}
+                         {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                          {{ message |safe }}
+                          </div>
+                         {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                     <table class="shopping-cart-table table">
+                        <tr>
+                            <th class="text-left">
+                                <div class="col-sm-6 pl-sm-0">
+                                <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0 " href="{% url 'accounts:update_profile' %}">Update profile</a></div>
+                                
+                                <div class="col-sm-6 pl-sm-0">
+                                <a class="btn btn-warning btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="#">Change password</a></div>
+                            </th>
+                            <td><img src="{{profile.image.url}}" style="border-radius: 45px; height: 200px "></td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Name</th>
+                            <td class="text-left">{{request.user.first_name}} {{request.user.last_name}}</td>
+                        </tr>
+                         <tr>
+                            <th class="text-left">Sexe</th>
+                            <td class="text-left">{{profile.sexe}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Email</th>
+                            <td class="text-left">{{request.user.email}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Phone</th>
+                            <td class="text-left">{{profile.phone}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Address</th>
+                            <td class="text-left">{{profile.adresse}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">City</th>
+                            <td class="text-left">{{profile.city}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Country</th>
+                            <td class="text-left">{{profile.country}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+
+{% endblock %}
